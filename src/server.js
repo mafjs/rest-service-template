@@ -32,6 +32,17 @@ init.config(logger)
 
         // TODO
         app.use(function (error, req, res, next) {
+            
+            var addAllRequestDataToError = function (error, req) {
+                error.message += '\n req path = ' + req.path;
+                error.message += ',\n request path params = ' + JSON.stringify(req.params);
+                error.message += ',\n request query params = ' + JSON.stringify(req.query);
+                error.message += ',\n request cookies = ' + JSON.stringify(req.cookies);
+                error.message += ',\n request headers = ' + JSON.stringify(req.params);
+                error.message += ',\n request body = ' + JSON.stringify(req.body);
+
+                return error;
+            };
 
             if (error && error.getCheckChain) {
                 error.getCheckChain()
@@ -48,7 +59,7 @@ init.config(logger)
                         }
                     )
                     .else(function (error) {
-                        logger.error(error);
+                        logger.error(addAllRequestDataToError(req, error));
 
                         res.status(500).json({
                             error: {
