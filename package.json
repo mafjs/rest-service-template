@@ -21,7 +21,7 @@
     "maf-error": "0.9.x",
     "maf-model-mongo": "0.0.x",
     "maf-rest": "0.4.x",
-    "maf-service-locator": "0.1.x",
+    "maf-service-locator": "0.2.x",
     "mongodb": "2.2.x",
     "morgan": "^1.8.1",
     "repl-extra": "0.1.x",
