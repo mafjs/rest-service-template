@@ -1,3 +1,5 @@
+require('source-map-support').install();
+
 const repl = require('repl-extra');
 
 process.on('unhandledRejection', function (err) {

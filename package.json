@@ -25,7 +25,9 @@
     "mongodb": "2.2.x",
     "morgan": "^1.8.1",
     "repl-extra": "0.1.x",
-    "socket.io": "^1.7.3",
     "superagent": "3.5.x"
+  },
+  "devDependencies": {
+    "source-map-support": "0.4.x"
   }
 }

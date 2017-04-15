@@ -1,3 +1,5 @@
+require('source-map-support').install();
+
 process.on('unhandledRejection', function (err) {
     logger.fatal(err);
 });

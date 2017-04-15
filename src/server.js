@@ -1,3 +1,4 @@
+require('source-map-support').install();
 require('maf-error/initGlobal');
 
 var init = {
