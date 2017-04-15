@@ -25,9 +25,11 @@
     "mongodb": "2.2.x",
     "morgan": "^1.8.1",
     "repl-extra": "0.1.x",
-    "superagent": "3.5.x"
+    "superagent": "3.5.x",
+    "source-map-support": "0.4.x"
   },
   "devDependencies": {
-    "source-map-support": "0.4.x"
+    "eslint": "3.19.x"
+    
   }
 }
