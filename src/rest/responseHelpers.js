@@ -1,6 +1,6 @@
 module.exports = function (rest) {
 
-    rest.responseHelpers.findResult = function (result, requestQuery, api) {
+    rest.responseHelpers.sendFindResult = function (result, requestQuery, api) {
         var metadata = {
             resultset: {
                 count: result.docs.length,
