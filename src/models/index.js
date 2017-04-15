@@ -9,7 +9,7 @@ module.exports = function (di) {
         // init models here
 
         models.ensureIndexes = function () {
-            var names = [];
+            var names = models.getNames();
 
             var promises = [];
 
