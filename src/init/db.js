@@ -28,8 +28,6 @@ module.exports = (di) => {
             di.logger.error(error);
         });
 
-        resolve(di);
-
     });
 
 };
