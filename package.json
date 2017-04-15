@@ -16,7 +16,7 @@
     "joi": "10.2.x",
     "lodash": "4.17.x",
     "log4js-nested": "1.x",
-    "maf-api-abstract": "0.1.x",
+    "maf-api-abstract": "0.2.x",
     "maf-config": "0.3.x",
     "maf-error": "0.9.x",
     "maf-model-mongo": "0.0.x",
