@@ -1,6 +1,10 @@
 require('source-map-support').install();
 require('maf-error/initGlobal');
 
+var ServerError = require('maf-error').create('ServerError', {
+    SERVER_ERROR: '%message%'
+});
+
 var init = {
     logger: require('./init/logger'),
     globalErrorHandlers: require('./init/globalErrorHandlers'),
@@ -33,7 +37,7 @@ init.config(logger)
         // TODO
         app.use(function (error, req, res, next) {
             
-            var addAllRequestDataToError = function (error, req) {
+            var addAllRequestDataToError = function (req, error) {
                 error.message += '\n req path = ' + req.path;
                 error.message += ',\n request path params = ' + JSON.stringify(req.params);
                 error.message += ',\n request query params = ' + JSON.stringify(req.query);
@@ -41,7 +45,7 @@ init.config(logger)
                 error.message += ',\n request headers = ' + JSON.stringify(req.params);
                 error.message += ',\n request body = ' + JSON.stringify(req.body);
 
-                return error;
+                return ServerError.createError(ServerError.CODES.SERVER_ERROR, error).bind({message: error.message});
             };
 
             if (error && error.getCheckChain) {
