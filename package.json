@@ -22,7 +22,7 @@
     "maf-config": "0.3.x",
     "maf-error": "0.9.x",
     "maf-model-mongo": "0.0.x",
-    "maf-rest": "0.5.x",
+    "maf-rest": "0.6.x",
     "maf-service-locator": "0.2.x",
     "mongodb": "2.2.x",
     "morgan": "^1.8.1",

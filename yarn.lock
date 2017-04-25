@@ -866,9 +866,9 @@ maf-model-mongo@0.0.x:
   dependencies:
     maf-error "0.9.x"
 
-maf-rest@0.5.x:
-  version "0.5.5"
-  resolved "http://sinopia.app.s/maf-rest/-/maf-rest-0.5.5.tgz#e12a44508cd28c775552b7d642440cb5a2dbf6c2"
+maf-rest@0.6.x:
+  version "0.6.0"
+  resolved "http://sinopia.app.s/maf-rest/-/maf-rest-0.6.0.tgz#1cd4579041f536e9f45505f3a6430a1e7ac67ac4"
   dependencies:
     body-parser "1.17.x"
     joi "10.4.x"
