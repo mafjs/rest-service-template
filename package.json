@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint -c .eslintrc.js src",
     "postversion": "git push origin && git push --tags"
   },
   "author": "alekzonder <alekzonder@gmail.com>",
@@ -31,6 +32,6 @@
   },
   "devDependencies": {
     "eslint": "3.19.x"
-    
+
   }
 }

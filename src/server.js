@@ -34,9 +34,9 @@ init.config(logger)
     })
     .then((app) => {
 
-        // TODO
+        // eslint-disable-next-line
         app.use(function (error, req, res, next) {
-            
+
             var addAllRequestDataToError = function (req, error) {
                 error.message += '\n req path = ' + req.path;
                 error.message += ',\n request path params = ' + JSON.stringify(req.params);
