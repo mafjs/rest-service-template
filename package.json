@@ -15,7 +15,7 @@
     "body-parser": "1.17.x",
     "cors": "2.8.x",
     "express": "4.15.x",
-    "joi": "10.2.x",
+    "joi": "10.4.x",
     "lodash": "4.17.x",
     "log4js-nested": "1.x",
     "maf-api-abstract": "0.3.x",
