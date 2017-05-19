@@ -1,4 +1,4 @@
-FROM alekzonder/pm2:6.10-slim
+FROM alekzonder/pm2:6.10-alpine
 
 WORKDIR /app
 
