@@ -1,6 +1,7 @@
 var express = require('express');
 var cors = require('cors');
 var morgan = require('morgan');
+var rfs = require('rotating-file-stream');
 
 module.exports = function (di) {
     var app = express();
@@ -9,8 +10,30 @@ module.exports = function (di) {
 
     app.disable('x-powered-by');
     app.disable('etag');
+    app.set('trust proxy', 'loopback, uniquelocal');
 
-    app.use(morgan('combined'));
+    var accessLogStream = rfs('access.log', {
+        interval: '1d',
+        path: '/var/log/app'
+    });
+
+    var accessLogFormat = [
+        ':remote-addr',
+        ':remote-user',
+        '[:date[clf]]',
+        ':method',
+        ':url',
+        'HTTP/:http-version',
+        ':status',
+        ':res[content-length]',
+        ':response-time',
+        ':referrer',
+        ':user-agent'
+    ];
+
+    accessLogFormat = accessLogFormat.join('\t');
+
+    app.use(morgan(accessLogFormat, {stream: accessLogStream}));
 
     app.use(function (req, res, next) {
 
