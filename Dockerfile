@@ -10,3 +10,5 @@ COPY yarn.lock /app/yarn.lock
 RUN yarn --production
 
 CMD ["pm2-docker", "index.js"]
+
+EXPOSE 3000
