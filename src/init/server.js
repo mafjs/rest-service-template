@@ -37,7 +37,11 @@ module.exports = function (di) {
 
     app.use(function (req, res, next) {
 
-        req.debug = true;
+        if (process.env.NODE_ENV === 'production') {
+            req.debug = false;
+        } else if (process.env.NODE_ENV === 'dev') {
+            req.debug = true;
+        }
 
         if (req.debug === true) {
 
