@@ -7,8 +7,8 @@ COPY package.json /app/package.json
 COPY index.js /app/index.js
 COPY yarn.lock /app/yarn.lock
 
-RUN yarn --production
+RUN yarn install --production && yarn cache clean
 
-CMD ["pm2-docker", "index.js"]
+CMD ["pm2-docker", "--raw", "index.js"]
 
 EXPOSE 3000
