@@ -19,7 +19,8 @@ class RequestDebug {
 var init = {
     db: require('./db'),
     models: require('../models'),
-    api: require('../api')
+    api: require('../api'),
+    hapi: require('../hapi')
 };
 
 var initDi = function (logger, config) {
@@ -40,6 +41,9 @@ var initDi = function (logger, config) {
             })
             .then(() => {
                 return init.api(di);
+            })
+            .then(() => {
+                return init.hapi(di);
             })
             .then(() => {
                 resolve(di);
