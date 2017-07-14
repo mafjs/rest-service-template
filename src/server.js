@@ -1,9 +1,6 @@
 require('source-map-support').install();
-require('maf-error/initGlobal');
 
-var ServerError = require('maf-error').create('ServerError', {
-    SERVER_ERROR: '%message%'
-});
+require('maf-error/initGlobal');
 
 var init = {
     logger: require('./init/logger'),
@@ -33,58 +30,6 @@ init.config(logger)
         return init.rest(di, app);
     })
     .then((app) => {
-
-        // eslint-disable-next-line
-        app.use(function (error, req, res, next) {
-
-            var addAllRequestDataToError = function (req, error) {
-                error.message += '\n req path = ' + req.path;
-                error.message += ',\n request path params = ' + JSON.stringify(req.params);
-                error.message += ',\n request query params = ' + JSON.stringify(req.query);
-                error.message += ',\n request cookies = ' + JSON.stringify(req.cookies);
-                error.message += ',\n request headers = ' + JSON.stringify(req.params);
-                error.message += ',\n request body = ' + JSON.stringify(req.body);
-
-                return ServerError.createError(ServerError.CODES.SERVER_ERROR, error).bind({message: error.message});
-            };
-
-            if (error && error.getCheckChain) {
-                error.getCheckChain()
-                    .ifCode(
-                        'INVALID_REQUEST_DATA',
-                        function (error) {
-                            res.status(400).json({
-                                error: {
-                                    message: error.mesage,
-                                    code: error.code,
-                                    list: error.list || error.details
-                                }
-                            });
-                        }
-                    )
-                    .else(function (error) {
-                        logger.error(addAllRequestDataToError(req, error));
-
-                        res.status(500).json({
-                            error: {
-                                message: 'Server Error',
-                                code: 'SERVER_ERROR'
-                            }
-                        });
-                    })
-                    .check();
-
-            } else {
-                logger.error(error);
-
-                res.status(500).json({
-                    error: {
-                        message: 'Server Error',
-                        code: 'SERVER_ERROR'
-                    }
-                });
-            }
-        });
 
         var host = di.config.get('host');
         var port = di.config.get('port');

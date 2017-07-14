@@ -1,11 +1,13 @@
-var log4js = require('log4js-nested');
+var Logger = require('maf-logger');
 
 module.exports = function () {
+    var logger = Logger.create('maf-rest-service');
+
     if (process.env.NODE_ENV === 'production') {
-        log4js.setGlobalLogLevel('INFO');
+        logger.level('INFO');
     } else {
-        log4js.setGlobalLogLevel('TRACE');
+        logger.level('TRACE');
     }
 
-    return log4js.getLogger('maf-rest-service');
+    return logger;
 };

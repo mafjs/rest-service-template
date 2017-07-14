@@ -2,7 +2,7 @@ var Config = require('maf-config');
 
 module.exports = function () {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve/*, reject*/) => {
         var config = new Config();
 
         config.setRaw('.', {
