@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint -c .eslintrc.js --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
-    "postversion": "git push origin && git push --tags"
+    "postversion": "git push origin && git push --tags",
+    "dev": "docker run --rm --name maf-rest-service -p 3000:3000 -v `pwd`:/app -v /tmp/app:/var/app alekzonder/pm2:6.10-slim pm2-docker --watch --raw index.js  | bunyan -l debug"
   },
   "author": "alekzonder <alekzonder@gmail.com>",
   "license": "UNLICENSED",
