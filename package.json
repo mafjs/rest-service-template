@@ -14,7 +14,7 @@
   "author": "alekzonder <alekzonder@gmail.com>",
   "license": "UNLICENSED",
   "dependencies": {
-    "body-parser": "^1.18.1",
+    "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "joi": "^10.6.0",
