@@ -1,10 +1,10 @@
-var express = require('express');
-var cors = require('cors');
-var morgan = require('morgan');
-var rfs = require('rotating-file-stream');
+let express = require('express');
+let cors = require('cors');
+let morgan = require('morgan');
+let rfs = require('rotating-file-stream');
 
-module.exports = function (di) {
-    var app = express();
+module.exports = function(di) {
+    let app = express();
 
     app.di = di;
 
@@ -12,12 +12,12 @@ module.exports = function (di) {
     app.disable('etag');
     app.set('trust proxy', 'loopback, uniquelocal');
 
-    var accessLogStream = rfs('access.log', {
+    let accessLogStream = rfs('access.log', {
         interval: '1d',
-        path: '/var/log/app'
+        path: '/var/log/app',
     });
 
-    var accessLogFormat = [
+    let accessLogFormat = [
         ':remote-addr',
         ':remote-user',
         '[:date[clf]]',
@@ -28,15 +28,14 @@ module.exports = function (di) {
         ':res[content-length]',
         ':response-time',
         ':referrer',
-        ':user-agent'
+        ':user-agent',
     ];
 
     accessLogFormat = accessLogFormat.join('\t');
 
     app.use(morgan(accessLogFormat, {stream: accessLogStream}));
 
-    app.use(function (req, res, next) {
-
+    app.use(function(req, res, next) {
         if (process.env.NODE_ENV === 'production') {
             req.debug = false;
         } else if (process.env.NODE_ENV === 'dev') {
@@ -44,7 +43,6 @@ module.exports = function (di) {
         }
 
         if (req.debug === true) {
-
             require('./di').debug(di)
                 .then((debugDi) => {
                     req.di = debugDi;
@@ -53,17 +51,15 @@ module.exports = function (di) {
                 .catch((error) => {
                     next(error);
                 });
-
         } else {
             req.di = di;
             next();
         }
-
     });
 
     app.use(cors({
         preflightContinue: true,
-        methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS']
+        methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     }));
 
     // init.nprof(di.logger, app, di.config.get('nprof'));

@@ -1,35 +1,32 @@
 'use strict';
 
 class RequestDebug {
-
-    constructor () {
+    constructor() {
         this._log = [];
     }
 
-    log (data) {
+    log(data) {
         this._log.push(data);
     }
 
-    get () {
+    get() {
         return this._log;
     }
 }
 
 
-var init = {
+let init = {
     db: require('./db'),
     models: require('../models'),
     api: require('../api'),
-    hapi: require('../hapi')
+    hapi: require('../hapi'),
 };
 
-var initDi = function (logger, config) {
-
+let initDi = function(logger, config) {
     return new Promise((resolve, reject) => {
-
-        var di = {
+        let di = {
             logger: logger,
-            config: config
+            config: config,
         };
 
         Promise.resolve()
@@ -51,21 +48,17 @@ var initDi = function (logger, config) {
             .catch((error) => {
                 reject(error);
             });
-
     });
-
 };
 
-initDi.debug = function (di) {
-
+initDi.debug = function(di) {
     return new Promise((resolve, reject) => {
-
-        var debugDi = {
+        let debugDi = {
             logger: di.logger,
             config: di.config,
             debug: new RequestDebug(),
             ssh: di.ssh,
-            db: di.db
+            db: di.db,
         };
 
         Promise.resolve()
@@ -81,9 +74,7 @@ initDi.debug = function (di) {
             .catch((error) => {
                 reject(error);
             });
-
     });
-
 };
 
 

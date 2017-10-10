@@ -2,21 +2,21 @@ require('source-map-support').install();
 
 require('maf-error/initGlobal');
 
-var init = {
+let init = {
     logger: require('./init/logger'),
     globalErrorHandlers: require('./init/globalErrorHandlers'),
     config: require('./init/config'),
     di: require('./init/di'),
     server: require('./init/server'),
     processSignals: require('./init/processSignals'),
-    rest: require('./rest')
+    rest: require('./rest'),
 };
 
-var logger = init.logger();
+let logger = init.logger();
 
 init.globalErrorHandlers(logger);
 
-var di;
+let di;
 
 init.config(logger)
     .then((config) => {
@@ -30,11 +30,10 @@ init.config(logger)
         return init.rest(di, app);
     })
     .then((app) => {
+        let host = di.config.get('host');
+        let port = di.config.get('port');
 
-        var host = di.config.get('host');
-        var port = di.config.get('port');
-
-        var server = app.listen(port, host, function () {
+        let server = app.listen(port, host, function() {
             di.logger.info(`listen on ${host}:${port}`);
         });
 

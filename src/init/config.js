@@ -1,9 +1,8 @@
-var Config = require('maf-config');
+let Config = require('maf-config');
 
-module.exports = function () {
-
-    return new Promise((resolve/*, reject*/) => {
-        var config = new Config();
+module.exports = function() {
+    return new Promise((resolve/* , reject*/) => {
+        let config = new Config();
 
         config.setRaw('.', {
             host: null,
@@ -14,16 +13,15 @@ module.exports = function () {
                     dsl: process.env.MONGO_DSL || 'mongodb://mongo:27017/db',
                     options: {
                         reconnectTries: 60,
-                        reconnectInterval: 1000
-                    }
-                }
+                        reconnectInterval: 1000,
+                    },
+                },
             },
             api: {
 
-            }
+            },
         });
 
         resolve(config);
     });
-
 };

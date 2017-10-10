@@ -1,20 +1,17 @@
-module.exports = function (rest) {
-    rest.setBeforeResponseMiddleware(function (req, res) {
-
+module.exports = function(rest) {
+    rest.setBeforeResponseMiddleware(function(req, res) {
         if (!res.httpContext) {
-
             return res.status(404).json({
                 error: {
                     message: 'resource not found',
-                    code: 'RESOURCE_NOT_FOUND'
-                }
+                    code: 'RESOURCE_NOT_FOUND',
+                },
             });
-
         }
 
         res.requestEnd();
 
-        var context = res.httpContext;
+        let context = res.httpContext;
 
         if (req.debug) {
             context.body.debug = {
@@ -25,7 +22,6 @@ module.exports = function (rest) {
         }
 
         res.json(context.body);
-
     });
 
     return rest;

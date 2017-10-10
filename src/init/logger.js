@@ -1,7 +1,7 @@
-var Logger = require('maf-logger');
+let Logger = require('maf-logger');
 
-module.exports = function () {
-    var logger = Logger.create('maf-rest-service');
+module.exports = function() {
+    let logger = Logger.create('maf-rest-service');
 
     if (process.env.NODE_ENV === 'production') {
         logger.level('INFO');

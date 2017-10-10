@@ -1,39 +1,40 @@
-var Rest = require('maf-rest');
+let Rest = require('maf-rest');
 
-module.exports = function (di, app) {
-
+module.exports = function(di, app) {
     return new Promise((resolve, reject) => {
-
-        var rest = new Rest(di.logger.getLogger('rest'));
+        let rest = new Rest(di.logger.getLogger('rest'));
 
         rest = require(`${__dirname}/responseHelpers`)(rest);
         rest = require(`${__dirname}/middlewares`)(rest);
 
         rest.setEndpoint('/api/v0');
 
-        var resources = [
+        let resources = [
 
             {
-                'GET /': function (req, res) {
+                'GET /': function(req, res) {
                     res.result({
-                        title: 'api'
+                        title: 'api',
                     });
-                }
-            }
+                },
+            },
 
             // add rest api resources here
 
         ];
 
-        var promises = [];
+        let promises = [];
 
-        for (var i in resources) {
+        Object.keys(resources).forEach((i) => {
             promises.push(rest.addMethods(resources[i]));
-        }
+        });
 
         Promise.all(promises)
             .then(() => {
-                return rest.init(app, di);
+                return rest.initApp(app, di);
+            })
+            .then(() => {
+                return rest.initMethods(app, di);
             })
             .then(() => {
                 resolve(app);
@@ -41,7 +42,5 @@ module.exports = function (di, app) {
             .catch((error) => {
                 reject(error);
             });
-
     });
-
 };

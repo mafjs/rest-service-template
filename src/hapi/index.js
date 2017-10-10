@@ -1,23 +1,20 @@
 // High-Level APIs
 
-var ServiceLocator = require('maf-service-locator');
+let ServiceLocator = require('maf-service-locator');
 
-var setDebug = function (api, di) {
+// let setDebug = function(api, di) {
+//     if (di.debug && typeof api.setDebug === 'function') {
+//         api.setDebug(api);
+//     }
+//
+//     return api;
+// };
 
-    if (di.debug && typeof api.setDebug === 'function') {
-        api.setDebug(api);
-    }
-
-    return api;
-};
-
-module.exports = function (di) {
-
+module.exports = function(di) {
     return new Promise((resolve) => {
+        let logger = di.logger.getLogger('hapi');
 
-        var logger = di.logger.getLogger('hapi');
-
-        var hapi = new ServiceLocator(logger);
+        let hapi = new ServiceLocator(logger);
 
         // init high-level apis here
 
@@ -25,5 +22,4 @@ module.exports = function (di) {
 
         resolve(di);
     });
-
 };

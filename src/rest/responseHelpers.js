@@ -1,4 +1,3 @@
-module.exports = function (rest) {
-
+module.exports = function(rest) {
     return rest;
 };

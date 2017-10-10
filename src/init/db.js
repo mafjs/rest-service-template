@@ -1,9 +1,7 @@
-var MongoClient = require('mongodb').MongoClient;
+// let MongoClient = require('mongodb').MongoClient;
 
 module.exports = (di) => {
-
     return new Promise((resolve, reject) => {
-
         return resolve();
 
         // init mongo db connection
@@ -27,7 +25,5 @@ module.exports = (di) => {
         // .catch((error) => {
         //     di.logger.error(error);
         // });
-
     });
-
 };

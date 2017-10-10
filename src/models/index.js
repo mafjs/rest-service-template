@@ -1,10 +1,9 @@
-var ServiceLocator = require('maf-service-locator');
+let ServiceLocator = require('maf-service-locator');
 
 
-module.exports = function (di) {
-
+module.exports = function(di) {
     return new Promise((resolve, reject) => {
-        var models = new ServiceLocator();
+        let models = new ServiceLocator();
 
         // models.set('oplog', function () {
         //     var Model = require('./Oplog');
@@ -20,12 +19,12 @@ module.exports = function (di) {
         //     return model;
         // });
 
-        models.ensureIndexes = function () {
-            var names = models.getNames();
+        models.ensureIndexes = function() {
+            let names = models.getNames();
 
-            var promises = [];
+            let promises = [];
 
-            for (var name of names) {
+            for (let name of names) {
                 promises.push(models.get(name).ensureIndexes());
             }
 
@@ -35,7 +34,5 @@ module.exports = function (di) {
         di.models = models;
 
         resolve(di);
-
     });
-
 };

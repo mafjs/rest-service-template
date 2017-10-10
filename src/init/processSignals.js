@@ -1,36 +1,31 @@
-module.exports = function (di, server) {
-
+module.exports = function(di, server) {
     return new Promise((resolve) => {
-
-        var signals = {
+        let signals = {
             'SIGINT': 2,
-            'SIGTERM': 15
+            'SIGTERM': 15,
         };
 
-        var connections = {};
+        let connections = {};
 
 
-        server.on('connection', function (connection) {
-
-            var key = connection.remoteAddress + ':' + connection.remotePort;
+        server.on('connection', function(connection) {
+            let key = connection.remoteAddress + ':' + connection.remotePort;
 
             connections[key] = connection;
 
-            connection.on('close', function () {
+            connection.on('close', function() {
                 delete connections[key];
             });
-
         });
 
-        function shutdown (signal, value) {
-
-            var promises = [];
+        function shutdown(signal, value) {
+            let promises = [];
 
             promises.push(new Promise((resolve, reject) => {
                 di.logger.info('stopping mongodb client');
 
                 if (di.db && di.db.mongo) {
-                    di.db.mongo.close(true, function (error) {
+                    di.db.mongo.close(true, function(error) {
                         if (error) {
                             di.logger.error(error);
                             process.exit(1);
@@ -46,25 +41,20 @@ module.exports = function (di, server) {
             }));
 
             promises.push(new Promise((resolve, reject) => {
-
                 di.logger.info('stopping http server');
 
-                server.close(function () {
+                server.close(function() {
                     di.logger.info('http server stopped by ' + signal);
                     resolve();
                 });
 
-                server.getConnections(function (error, count) {
-
+                server.getConnections(function(error, count) {
                     di.logger.info(`http server: destroy ${count} connections`);
 
-                    for (var key in connections) {
+                    Object.keys(connections).forEach((key) => {
                         connections[key].destroy();
-                    }
-
+                    });
                 });
-
-
             }));
 
             Promise.all(promises)
@@ -76,20 +66,16 @@ module.exports = function (di, server) {
                     di.logger.error(error);
                     process.exit(128 + value);
                 });
-
         }
 
 
-        Object.keys(signals).forEach(function (signal) {
-
-            process.on(signal, function () {
+        Object.keys(signals).forEach(function(signal) {
+            process.on(signal, function() {
                 di.logger.info(`CATCH SIGNAL ${signal}`);
                 shutdown(signal, signals[signal]);
             });
-
         });
 
         resolve(server);
     });
-
 };

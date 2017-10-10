@@ -1,18 +1,18 @@
 require('source-map-support').install();
 
-process.on('unhandledRejection', function (err) {
+process.on('unhandledRejection', function(err) {
     logger.fatal(err);
 });
 
-var init = {
+let init = {
     logger: require('./init/logger'),
     config: require('./init/config'),
-    di: require('./init/di')
+    di: require('./init/di'),
 };
 
-var logger = init.logger();
+let logger = init.logger();
 
-var di = null;
+let di = null;
 
 init.config(logger)
     .then((config) => {
@@ -24,6 +24,7 @@ init.config(logger)
         return di.models.ensureIndexes();
     })
     .then((result) => {
+        // eslint-disable-next-line no-console
         console.log('ensureIndexes', result);
         return di.db.mongo.close();
     })
