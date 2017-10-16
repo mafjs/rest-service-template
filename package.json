@@ -24,7 +24,7 @@
     "maf-error": "^1.2.0",
     "maf-logger": "^0.6.1",
     "maf-model-mongo": "^0.1.0",
-    "maf-rest": "^0.18.0",
+    "maf-rest": "^0.19.2",
     "maf-service-locator": "^0.3.0",
     "mongodb": "^2.2.31",
     "morgan": "^1.9.0",
