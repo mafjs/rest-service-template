@@ -34,6 +34,6 @@
     "superagent": "^3.6.3"
   },
   "devDependencies": {
-    "@maf/eslint-config": "^0.4.2"
+    "@maf/eslint-config": "^0.5.0"
   }
 }
