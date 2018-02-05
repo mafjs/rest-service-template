@@ -18,7 +18,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "joi": "^11.3.4",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.5",
     "maf-api-abstract": "^0.7.0",
     "maf-config": "^1.2.0",
     "maf-error": "^1.2.0",
